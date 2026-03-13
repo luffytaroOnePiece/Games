@@ -532,7 +532,7 @@ body {
   padding-top: 56px;
 }
 
-/* Status Badge — minimal frosted pill */
+/* Status Badge — solid coloured pill, white text */
 .card-status-badge {
   position: absolute;
   top: 12px;
@@ -543,35 +543,31 @@ body {
   font-weight: 700;
   letter-spacing: 0.9px;
   text-transform: uppercase;
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  color: #fff;
   z-index: 3;
-  border: 1px solid transparent;
+  border: none;
 }
 
 .status-playing {
-  background: rgba(245, 158, 11, 0.15);
-  color: #fbbf24;
-  border-color: rgba(245, 158, 11, 0.28);
+  background: #d97706;
 }
 
+/* amber-600  */
 .status-completed {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border-color: rgba(16, 185, 129, 0.28);
+  background: #059669;
 }
 
+/* emerald-600 */
 .status-wishlist {
-  background: rgba(139, 92, 246, 0.15);
-  color: #c4b5fd;
-  border-color: rgba(139, 92, 246, 0.28);
+  background: #7c3aed;
 }
 
+/* violet-600  */
 .status-paused {
-  background: rgba(100, 116, 139, 0.15);
-  color: #94a3b8;
-  border-color: rgba(100, 116, 139, 0.22);
+  background: #475569;
 }
+
+/* slate-600   */
 
 
 .card-platform-badge {
