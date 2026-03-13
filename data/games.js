@@ -30,8 +30,14 @@ const GAMES = [
     imageBaseUrl: "https://raw.githubusercontent.com/luffytaroOnePiece/God-of-War-Ragnarok/main/",
     accentColor: "#c0392b",
     accentGlow: "rgba(192, 57, 43, 0.45)",
-    description: "Kratos and Atreus journey to each of the Nine Realms in search of answers as Fimbulwinter approaches.",
-    tags: ["Norse Mythology", "Epic Story", "Combat", "Exploration"]
+    description: "From Santa Monica Studio comes the sequel to the critically acclaimed God of War (2018). Fimbulwinter is well underway. Kratos and Atreus must journey to each of the Nine Realms in search of answers as Asgardian forces prepare for a prophesied battle that will end the world. Along the way they will explore stunning, mythical landscapes, and face fearsome enemies in the form of Norse gods and monsters. The threat of Ragnarök grows ever closer. Kratos and Atreus must choose between their own safety and the safety of the realms.",
+    tags: [
+      "Action-Adventure",
+      "Norse Mythology",
+      "Story-Driven",
+      "Melee Combat",
+      "Exploration"
+    ]
   },
   {
     id: "last-of-us-part-1",
@@ -50,7 +56,13 @@ const GAMES = [
     imageBaseUrl: null,
     accentColor: "#27ae60",
     accentGlow: "rgba(39, 174, 96, 0.45)",
-    description: "A rebuilt experience of the original masterpiece — Joel and Ellie survive a post-pandemic America.",
-    tags: ["Post-Apocalyptic", "Emotional", "Stealth", "Story-Rich"]
+    description: "In a ravaged civilisation, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.",
+    tags: [
+      "Action-Adventure",
+      "Survival",
+      "Story Rich",
+      "Post-Apocalyptic",
+      "Stealth",
+    ]
   }
 ];
