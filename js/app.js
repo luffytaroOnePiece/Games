@@ -59,6 +59,8 @@ function buildCard(game) {
   card.className = 'game-card';
   card.setAttribute('role', 'listitem');
   card.setAttribute('data-status', game.status);
+  card.setAttribute('tabindex', '0');
+  card.setAttribute('aria-label', `Open ${game.title}`);
   card.style.setProperty('--game-accent', game.accentColor);
   card.style.setProperty('--game-glow', game.accentGlow);
 
@@ -134,6 +136,17 @@ function buildCard(game) {
       </div>
     </div>
   `;
+
+  // Make the whole card clickable
+  const dest = `game.html?id=${game.id}`;
+  card.addEventListener('click', (e) => {
+    // Don't navigate if user clicked a button/link inside the card
+    if (e.target.closest('a, button')) return;
+    location.href = dest;
+  });
+  card.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); location.href = dest; }
+  });
 
   // Animate progress bar on next frame
   requestAnimationFrame(() => {
