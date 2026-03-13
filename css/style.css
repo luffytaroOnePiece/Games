@@ -795,9 +795,9 @@ body {
 /* ─── Game Detail Page ───────────────────────────────────── */
 .detail-hero {
   position: relative;
-  height: 420px;
+  height: 460px;
   overflow: hidden;
-  margin-bottom: -80px;
+  margin-bottom: -100px;
 }
 
 .detail-hero-bg {
@@ -809,15 +809,16 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.35) saturate(1.2);
+  filter: brightness(0.28) saturate(1.3);
+  transform: scale(1.04);
 }
 
 .detail-hero-gradient {
   position: absolute;
   inset: 0;
   background: linear-gradient(to bottom,
-      transparent 0%,
-      rgba(5, 5, 13, 0.3) 50%,
+      rgba(5, 5, 13, 0.05) 0%,
+      rgba(5, 5, 13, 0.2) 40%,
       var(--bg-primary) 100%);
 }
 
@@ -832,28 +833,31 @@ body {
   border-radius: var(--radius-xl);
   backdrop-filter: var(--blur-glass);
   -webkit-backdrop-filter: var(--blur-glass);
-  padding: 32px;
-  margin-bottom: 32px;
+  padding: 28px 32px;
+  margin-bottom: 24px;
 }
 
 .detail-header {
   display: flex;
   gap: 28px;
   align-items: flex-start;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .detail-cover-thumb {
-  width: 130px;
+  width: 150px;
   flex-shrink: 0;
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  border: 2px solid rgba(255, 255, 255, 0.08);
+  aspect-ratio: 2/3;
 }
 
 .detail-cover-thumb img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   display: block;
 }
 
@@ -908,15 +912,16 @@ body {
 
 /* ─── Chapter Accordion ───────────────────────────────────── */
 .chapters-section {
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .chapters-title {
   font-family: var(--font-title);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   color: var(--text-primary);
+  letter-spacing: 0.3px;
 }
 
 .chapter-item {
@@ -926,58 +931,59 @@ body {
   overflow: hidden;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  margin-bottom: 10px;
-  transition: border-color var(--transition-fast);
+  margin-bottom: 8px;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
 }
 
 .chapter-item.open {
   border-color: var(--glass-border-hover);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .chapter-header {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 18px 20px;
+  gap: 12px;
+  padding: 16px 20px;
   cursor: pointer;
   user-select: none;
   transition: background var(--transition-fast);
+  border-left: 3px solid transparent;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+
+.chapter-item.open .chapter-header {
+  border-left-color: var(--game-accent, var(--accent));
 }
 
 .chapter-header:hover {
   background: rgba(255, 255, 255, 0.03);
 }
 
-.chapter-number {
-  font-family: var(--font-title);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  padding: 4px 10px;
-  border-radius: 100px;
-  background: var(--chapter-accent, rgba(124, 106, 247, 0.2));
-  color: var(--chapter-accent-text, var(--accent));
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-
 .chapter-name {
   flex: 1;
-  font-size: 0.96rem;
+  font-size: 0.93rem;
   font-weight: 600;
   color: var(--text-primary);
+  letter-spacing: 0.1px;
 }
 
 .chapter-count {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
+  font-weight: 500;
   color: var(--text-muted);
   white-space: nowrap;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .chapter-chevron {
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   color: var(--text-muted);
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-med);
+  margin-left: 4px;
 }
 
 .chapter-item.open .chapter-chevron {
@@ -986,7 +992,7 @@ body {
 
 .chapter-body {
   display: none;
-  padding: 0 20px 20px;
+  padding: 4px 20px 20px;
 }
 
 .chapter-item.open .chapter-body {
@@ -996,8 +1002,8 @@ body {
 /* ─── Screenshot Grid ─────────────────────────────────────── */
 .screenshot-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
 }
 
 .screenshot-thumb {
@@ -1007,30 +1013,46 @@ body {
   cursor: pointer;
   position: relative;
   background: rgba(255, 255, 255, 0.04);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.screenshot-thumb:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  z-index: 2;
 }
 
 .screenshot-thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-med);
   display: block;
+  transition: transform var(--transition-med);
 }
 
 .screenshot-thumb:hover img {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
 .screenshot-thumb-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
   transition: opacity var(--transition-fast);
-  font-size: 1.4rem;
+}
+
+.screenshot-thumb-overlay::after {
+  content: '';
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='white'%3E%3Cpath d='M3 8a5 5 0 1110 0A5 5 0 013 8zm5-7a7 7 0 104.192 12.606l3.1 3.1a1 1 0 001.415-1.414l-3.1-3.1A7 7 0 008 1z'/%3E%3C/svg%3E") center/18px no-repeat;
+  backdrop-filter: blur(4px);
 }
 
 .screenshot-thumb:hover .screenshot-thumb-overlay {

@@ -173,11 +173,6 @@ function renderChapters(json, game, container) {
       <div class="chapter-header" role="button" tabindex="0"
            aria-expanded="false" aria-controls="chapter-body-${ci}"
            id="chapter-header-${ci}">
-        <span class="chapter-number"
-              style="--chapter-accent:rgba(${hexToRgb(game.accentColor)},0.25);
-                     --chapter-accent-text:${game.accentColor}">
-          Ch. ${ci + 1}
-        </span>
         <span class="chapter-name">${chapterName}</span>
         <span class="chapter-count">${total} shot${total !== 1 ? 's' : ''}</span>
         <span class="chapter-chevron" aria-hidden="true">▼</span>
