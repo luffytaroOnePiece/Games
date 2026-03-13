@@ -91,14 +91,18 @@ function renderGameMeta(game) {
   document.getElementById('detail-subtitle').textContent = game.subtitle;
   document.getElementById('detail-description').textContent = game.description;
 
-  // Badges
+  // Badges — two rows: status+platform, then tags
   const statusMeta = STATUS_META[game.status] || STATUS_META.wishlist;
   const badgesEl = document.getElementById('detail-badges');
   badgesEl.innerHTML = `
-    <span class="card-status-badge ${statusMeta.cls}" style="position:static">${statusMeta.label}</span>
-    <span class="card-platform-badge" style="position:static">${game.platform}</span>
-    <span class="card-tag">${game.genre}</span>
-    ${game.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+    <div class="detail-badges-row">
+      <span class="card-status-badge ${statusMeta.cls}" style="position:static">${statusMeta.label}</span>
+      <span class="card-platform-badge" style="position:static">${game.platform}</span>
+    </div>
+    <div class="detail-tags-row">
+      <span class="card-tag">${game.genre}</span>
+      ${game.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+    </div>
   `;
 
   // Progress bar
