@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Game detail page — chapters and screenshots viewer." />
+    <title>GameVault · Loading…</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-canvas" aria-hidden="true">
+        <div class="bg-grid"></div>
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+        <div class="bg-orb bg-orb-3"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Navigation -->
+        <nav class="nav" role="navigation" aria-label="Main navigation">
+            <div class="container nav-inner">
+                <a href="index.html" class="nav-logo" aria-label="GameVault Home">
+                    <div class="nav-logo-icon" aria-hidden="true">🎮</div>
+                    <span class="nav-logo-text">Game<span>Vault</span></span>
+                </a>
+            </div>
+        </nav>
+
+        <main id="main-content">
+            <!-- Hero Banner (populated by game.js) -->
+            <div class="detail-hero" id="detail-hero" aria-hidden="true">
+                <div class="detail-hero-bg">
+                    <img id="detail-hero-img" src="" alt="" />
+                </div>
+                <div class="detail-hero-gradient"></div>
+            </div>
+
+            <!-- Detail Content -->
+            <div class="detail-content container">
+
+                <!-- Back + Game Info Card -->
+                <div class="detail-card" id="game-info-card">
+                    <a href="index.html" class="back-link" aria-label="Back to library">
+                        &#8592; &nbsp;Back to Library
+                    </a>
+
+                    <div class="detail-header">
+                        <div class="detail-cover-thumb">
+                            <img id="detail-cover" src="" alt="Game cover" loading="lazy" />
+                        </div>
+                        <div class="detail-meta">
+                            <h1 class="detail-title" id="detail-title">Loading…</h1>
+                            <div class="detail-subtitle" id="detail-subtitle"></div>
+                            <div class="detail-badges" id="detail-badges"></div>
+                            <p class="detail-description" id="detail-description"></p>
+                        </div>
+                    </div>
+
+                    <!-- Progress -->
+                    <div class="card-progress-section" id="detail-progress-section">
+                        <div class="card-progress-header">
+                            <span class="card-progress-label">Progress</span>
+                            <span class="card-progress-value" id="detail-progress-value">0%</span>
+                        </div>
+                        <div class="progress-bar-track">
+                            <div class="progress-bar-fill" id="detail-progress-fill" style="width:0%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshots / Chapters Section -->
+                <div id="chapters-container" class="chapters-section">
+                    <!-- Loading state shown first -->
+                    <div class="loading-overlay" id="chapters-loading">
+                        <div class="spinner"></div>
+                        <span>Loading screenshots…</span>
+                    </div>
+                </div>
+
+            </div><!-- /detail-content -->
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer container">
+            <p>Built with ❤️ · <a href="https://github.com/luffytaroOnePiece" target="_blank"
+                    rel="noopener">luffytaroOnePiece</a> · Deployed on GitHub Pages</p>
+        </footer>
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+        <button class="lightbox-close" id="lightbox-close" aria-label="Close viewer">✕</button>
+        <div class="lightbox-img-wrap">
+            <button class="lightbox-nav lightbox-prev" id="lightbox-prev"
+                aria-label="Previous screenshot">&#8592;</button>
+            <img class="lightbox-img" id="lightbox-img" src="" alt="Screenshot" />
+            <button class="lightbox-nav lightbox-next" id="lightbox-next" aria-label="Next screenshot">&#8594;</button>
+            <div class="lightbox-counter" id="lightbox-counter"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data/games.js"></script>
+    <script src="js/game.js"></script>
+</body>
+
+</html>

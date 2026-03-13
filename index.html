@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A personal gaming tracker — tracking playthroughs, screenshots and progress across my favorite games." />
+  <title>GameVault · My Gaming Tracker</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+    <!-- Navigation -->
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="index.html" class="nav-logo" aria-label="GameVault Home">
+          <div class="nav-logo-icon" aria-hidden="true">🎮</div>
+          <span class="nav-logo-text">Game<span>Vault</span></span>
+        </a>
+        <div class="nav-right">
+          <div class="nav-stat" id="nav-playing-count" title="Currently playing">
+            <span class="dot" aria-hidden="true"></span>
+            <span id="playing-label">— Playing</span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <!-- Hero -->
+      <section class="hero container" aria-label="Page header">
+        <div class="hero-label" aria-hidden="true">🕹️ &nbsp;Personal Collection</div>
+        <h1 class="hero-title">My <span>Gaming</span> Vault</h1>
+        <p class="hero-subtitle">
+          Tracking every adventure, chapter, and screenshot from the games I love.
+        </p>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar" id="stats-bar" role="region" aria-label="Collection statistics">
+          <div class="stat-item">
+            <div class="stat-value" id="stat-total">0</div>
+            <div class="stat-label">Games</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-playing">0</div>
+            <div class="stat-label">Playing</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-completed">0</div>
+            <div class="stat-label">Completed</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value" id="stat-wishlist">0</div>
+            <div class="stat-label">Wishlist</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Games Section -->
+      <section class="container" aria-label="Game library">
+        <div class="section-header">
+          <h2 class="section-title">Library</h2>
+          <span class="section-count" id="section-count">— games</span>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs" role="tablist" aria-label="Filter games by status">
+          <button class="filter-tab active" role="tab" aria-selected="true"  data-filter="all"       id="tab-all">All</button>
+          <button class="filter-tab"        role="tab" aria-selected="false" data-filter="playing"   id="tab-playing">Playing</button>
+          <button class="filter-tab"        role="tab" aria-selected="false" data-filter="completed" id="tab-completed">Completed</button>
+          <button class="filter-tab"        role="tab" aria-selected="false" data-filter="wishlist"  id="tab-wishlist">Wishlist</button>
+          <button class="filter-tab"        role="tab" aria-selected="false" data-filter="paused"    id="tab-paused">Paused</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="games-grid" id="games-grid" role="list" aria-label="Game cards">
+          <!-- Rendered by app.js -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer container">
+      <p>Built with ❤️ · <a href="https://github.com/luffytaroOnePiece" target="_blank" rel="noopener">luffytaroOnePiece</a> · Deployed on GitHub Pages</p>
+    </footer>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data/games.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

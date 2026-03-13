@@ -1,0 +1,56 @@
+/**
+ * Central game configuration for the Gaming Tracker.
+ * Images are fetched on demand from Steam's CDN — no local assets needed.
+ *
+ * Steam CDN pattern:
+ *   Cover  (portrait 600×900): https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{appId}/library_600x900_2x.jpg
+ *   Banner (landscape hero):   https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{appId}/library_hero.jpg
+ */
+
+const STEAM_CDN = (appId) => ({
+  coverArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
+  bannerArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_hero.jpg`,
+});
+
+const GAMES = [
+  {
+    id: "god-of-war-ragnarok",
+    title: "God of War Ragnarök",
+    subtitle: "Santa Monica Studio · 2022",
+    platform: "PS5",
+    genre: "Action-Adventure",
+    status: "playing",
+    progress: 30,
+    chaptersTotal: 9,
+    chaptersCompleted: 3,
+    rating: 0,
+    steamAppId: 2322010,
+    ...STEAM_CDN(2322010),
+    dataSourceUrl: "https://raw.githubusercontent.com/luffytaroOnePiece/God-of-War-Ragnarok/main/dataSource.json",
+    imageBaseUrl: "https://raw.githubusercontent.com/luffytaroOnePiece/God-of-War-Ragnarok/main/",
+    accentColor: "#c0392b",
+    accentGlow: "rgba(192, 57, 43, 0.45)",
+    description: "Kratos and Atreus journey to each of the Nine Realms in search of answers as Fimbulwinter approaches.",
+    tags: ["Norse Mythology", "Epic Story", "Combat", "Exploration"]
+  },
+  {
+    id: "last-of-us-part-1",
+    title: "The Last of Us Part I",
+    subtitle: "Naughty Dog · 2022",
+    platform: "PS5",
+    genre: "Survival Horror",
+    status: "completed",
+    progress: 100,
+    chaptersTotal: 9,
+    chaptersCompleted: 9,
+    rating: 9,
+    steamAppId: 1888930,
+    ...STEAM_CDN(1888930),
+    dataSourceUrl: null,
+    imageBaseUrl: null,
+    accentColor: "#27ae60",
+    accentGlow: "rgba(39, 174, 96, 0.45)",
+    description: "A rebuilt experience of the original masterpiece — Joel and Ellie survive a post-pandemic America.",
+    tags: ["Post-Apocalyptic", "Emotional", "Stealth", "Story-Rich"]
+  }
+];
