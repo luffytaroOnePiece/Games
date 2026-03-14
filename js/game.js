@@ -15,7 +15,7 @@ const lb = {
   prev: null,
   next: null,
   close: null,
-  images: [],   // flat array of { src, alt }
+  images: [],   // flat array of { src, thumbSrc, alt }
   current: 0,
 };
 
@@ -160,7 +160,9 @@ function renderChapters(json, game, container) {
       files.forEach(file => {
         const folder = chapterName.replace(/ /g, '%20');
         const src = `${game.imageBaseUrl}${folder}/${subKey}/${encodeURIComponent(file)}`;
-        chapterImages.push({ src, alt: `${chapterName} — ${file}` });
+        // Thumbnail via wsrv.nl: resize to 640px wide at 65% quality (~50–150 KB vs 20 MB)
+        const thumbSrc = `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=640&q=65&output=webp`;
+        chapterImages.push({ src, thumbSrc, alt: `${chapterName} — ${file}` });
       });
     });
 
@@ -191,7 +193,7 @@ function renderChapters(json, game, container) {
                  aria-label="Open screenshot ${i + 1} of ${total}"
                  data-global-index="${globalOffset + i}">
               <img
-                src="${img.src}"
+                src="${img.thumbSrc}"
                 alt="${img.alt}"
                 loading="lazy"
                 width="320" height="180"
@@ -286,12 +288,13 @@ function navigate(dir) {
 function updateLightboxImage() {
   const item = lb.images[lb.current];
   lb.img.style.opacity = '0';
+  // Lightbox always shows the full-res original for best quality
   lb.img.src = item.src;
   lb.img.alt = item.alt;
   lb.img.onload = () => { lb.img.style.opacity = '1'; };
   lb.counter.textContent = `${lb.current + 1} / ${lb.images.length}`;
 
-  // Update download link
+  // Download link always points to the full-res original
   if (lb.download) {
     lb.download.href = item.src;
     lb.download.download = item.alt.split('/').pop() || `screenshot-${lb.current + 1}.jpg`;

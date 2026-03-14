@@ -28,7 +28,7 @@ const GAMES = [
       "https://raw.githubusercontent.com/luffytaroOnePiece/God-of-War-Ragnarok/main/dataSource.json",
     imageBaseUrl:
       "https://raw.githubusercontent.com/luffytaroOnePiece/God-of-War-Ragnarok/main/",
-    accentColor: "#c0392b",
+    accentColor: "#2b76c0ff",
     accentGlow: "rgba(192, 57, 43, 0.45)",
     description:
       "From Santa Monica Studio comes the sequel to the critically acclaimed God of War (2018). Fimbulwinter is well underway. Kratos and Atreus must journey to each of the Nine Realms in search of answers as Asgardian forces prepare for a prophesied battle that will end the world. Along the way they will explore stunning, mythical landscapes, and face fearsome enemies in the form of Norse gods and monsters. The threat of Ragnarök grows ever closer. Kratos and Atreus must choose between their own safety and the safety of the realms.",
