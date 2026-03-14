@@ -95,6 +95,7 @@ function buildCard(game) {
       <div class="card-cover-meta">
         <div class="card-title">${game.title}</div>
         <div class="card-subtitle">${game.subtitle}</div>
+        ${game.rating > 0 ? `<div class="card-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></div>` : ''}
       </div>
     </div>
 

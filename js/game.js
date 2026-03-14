@@ -91,13 +91,14 @@ function renderGameMeta(game) {
   document.getElementById('detail-subtitle').textContent = game.subtitle;
   document.getElementById('detail-description').textContent = game.description;
 
-  // Badges — two rows: status+platform, then tags
+  // Badges — two rows: status+platform+rating, then tags
   const statusMeta = STATUS_META[game.status] || STATUS_META.wishlist;
   const badgesEl = document.getElementById('detail-badges');
   badgesEl.innerHTML = `
     <div class="detail-badges-row">
       <span class="card-status-badge ${statusMeta.cls}" style="position:static">${statusMeta.label}</span>
       <span class="card-platform-badge" style="position:static">${game.platform}</span>
+      ${game.rating > 0 ? `<span class="detail-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></span>` : ''}
     </div>
     <div class="detail-tags-row">
       <span class="card-tag">${game.genre}</span>
@@ -143,7 +144,7 @@ function renderChapters(json, game, container) {
 
   container.innerHTML = `
     <h2 class="chapters-title" style="margin-bottom:16px;">
-      📸 Screenshots <span style="font-size:.9rem;color:var(--text-muted);font-weight:500">(${chapterNames.length} chapter${chapterNames.length !== 1 ? 's' : ''})</span>
+      📸 Screenshots
     </h2>
   `;
 
