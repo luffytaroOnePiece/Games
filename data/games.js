@@ -179,8 +179,10 @@ const GAMES = [
     rating: 9.5,
     steamAppId: 1551360,
     ...STEAM_CDN(1551360),
-    dataSourceUrl: null,
-    imageBaseUrl: null,
+    dataSourceUrl:
+      "https://raw.githubusercontent.com/luffytaroOnePiece/fh5/main/dataSource.json",
+    imageBaseUrl:
+      "https://raw.githubusercontent.com/luffytaroOnePiece/fh5/main/",
     accentColor: "#e67e22",
     accentGlow: "rgba(230, 126, 34, 0.45)",
     description:

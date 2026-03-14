@@ -173,20 +173,32 @@ function renderChapters(json, game, container) {
 
   chapterNames.forEach((chapterName, ci) => {
     const subSections = data[chapterName];
-    const subKeys = Object.keys(subSections);
 
     // Gather all images in this chapter for lb
     const chapterImages = [];
-    subKeys.forEach((subKey) => {
-      const files = subSections[subKey];
-      files.forEach((file) => {
-        const folder = chapterName.replace(/ /g, "%20");
-        const src = `${game.imageBaseUrl}${folder}/${subKey}/${encodeURIComponent(file)}`;
-        // Thumbnail via wsrv.nl: resize to 640px wide at 65% quality (~50–150 KB vs 20 MB)
+
+    if (Array.isArray(subSections)) {
+      // Flat format: { "Chapter Name": ["file1.PNG", "file2.PNG", ...] }
+      subSections.forEach((file) => {
+        const folder = encodeURIComponent(chapterName);
+        const src = `${game.imageBaseUrl}${folder}/${encodeURIComponent(file)}`;
         const thumbSrc = `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=640&q=65&output=webp`;
         chapterImages.push({ src, thumbSrc, alt: `${chapterName} — ${file}` });
       });
-    });
+    } else {
+      // Nested format: { "Chapter Name": { "subKey": ["file1.PNG", ...], ... } }
+      const subKeys = Object.keys(subSections);
+      subKeys.forEach((subKey) => {
+        const files = subSections[subKey];
+        files.forEach((file) => {
+          const folder = chapterName.replace(/ /g, "%20");
+          const src = `${game.imageBaseUrl}${folder}/${subKey}/${encodeURIComponent(file)}`;
+          // Thumbnail via wsrv.nl: resize to 640px wide at 65% quality (~50–150 KB vs 20 MB)
+          const thumbSrc = `https://wsrv.nl/?url=${encodeURIComponent(src)}&w=640&q=65&output=webp`;
+          chapterImages.push({ src, thumbSrc, alt: `${chapterName} — ${file}` });
+        });
+      });
+    }
 
     const globalOffset = lb.images.length;
     lb.images.push(...chapterImages);
