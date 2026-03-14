@@ -282,7 +282,7 @@ const GAMES = [
     ],
     fallbackImage: true,
     fallbackCover:
-      "https://gmedia.playstation.com/is/image/SIEPDC/Black-Myth-Wukong-Trailer-1-Homepage-Hero-Mobile-01-06may25?$800px$",
+      "https://gmedia.playstation.com/is/image/SIEPDC/black-myth-wukong-hero-mobile-01-en-07feb24?$800px$",
     fallbackBanner: null,
     trailers: ["pnSsgRJmsCc", "u83VdXAVq08", "Cr5rQ1NZ0Tw"],
   },
@@ -310,9 +310,6 @@ const GAMES = [
       "Open World",
       "Japanese Mythology",
     ],
-    fallbackImage: true,
-    fallbackCover:
-      "https://gmedia.playstation.com/is/image/SIEPDC/black-myth-wukong-hero-mobile-01-en-07feb24?$800px$",
     trailers: ["dIf6fmWTv_M"],
   },
 ];
