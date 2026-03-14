@@ -11,6 +11,7 @@ const lb = {
   el: null,
   img: null,
   counter: null,
+  download: null,
   prev: null,
   next: null,
   close: null,
@@ -197,7 +198,7 @@ function renderChapters(json, game, container) {
                 onload="this.closest('.screenshot-thumb').classList.remove('loading')"
                 onerror="this.closest('.screenshot-thumb').style.opacity='0.3'"
               />
-              <div class="screenshot-thumb-overlay" aria-hidden="true">🔍</div>
+              <div class="screenshot-thumb-overlay" aria-hidden="true"></div>
             </div>
           `).join('')}
         </div>
@@ -237,6 +238,7 @@ function initLightbox() {
   lb.el = document.getElementById('lightbox');
   lb.img = document.getElementById('lightbox-img');
   lb.counter = document.getElementById('lightbox-counter');
+  lb.download = document.getElementById('lightbox-download');
   lb.prev = document.getElementById('lightbox-prev');
   lb.next = document.getElementById('lightbox-next');
   lb.close = document.getElementById('lightbox-close');
@@ -288,6 +290,12 @@ function updateLightboxImage() {
   lb.img.alt = item.alt;
   lb.img.onload = () => { lb.img.style.opacity = '1'; };
   lb.counter.textContent = `${lb.current + 1} / ${lb.images.length}`;
+
+  // Update download link
+  if (lb.download) {
+    lb.download.href = item.src;
+    lb.download.download = item.alt.split('/').pop() || `screenshot-${lb.current + 1}.jpg`;
+  }
 
   lb.prev.style.visibility = lb.images.length > 1 ? 'visible' : 'hidden';
   lb.next.style.visibility = lb.images.length > 1 ? 'visible' : 'hidden';

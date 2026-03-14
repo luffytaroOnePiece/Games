@@ -73,7 +73,7 @@ const GAMES = [
     genre: "Soulslike - Action RPG",
     status: "playing",
     progress: 50,
-    rating: 0,
+    rating: 10,
     steamAppId: 1245620,
     ...STEAM_CDN(1245620),
     dataSourceUrl: null,

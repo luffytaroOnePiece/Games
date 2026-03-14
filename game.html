@@ -94,7 +94,13 @@
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
-        <button class="lightbox-close" id="lightbox-close" aria-label="Close viewer">✕</button>
+        <div class="lightbox-actions">
+            <a class="lightbox-download" id="lightbox-download" download aria-label="Download screenshot"
+                title="Download">
+                ⬇ Download
+            </a>
+            <button class="lightbox-close" id="lightbox-close" aria-label="Close viewer">✕</button>
+        </div>
         <div class="lightbox-img-wrap">
             <button class="lightbox-nav lightbox-prev" id="lightbox-prev"
                 aria-label="Previous screenshot">&#8592;</button>
