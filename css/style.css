@@ -1150,18 +1150,11 @@ body {
   pointer-events: all;
 }
 
-/* Lightbox actions bar (top-right) */
-.lightbox-actions {
+/* Lightbox close — top right */
+.lightbox-close {
   position: absolute;
   top: 20px;
   right: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  z-index: 10;
-}
-
-.lightbox-close {
   width: 44px;
   height: 44px;
   background: rgba(255, 255, 255, 0.1);
@@ -1174,14 +1167,18 @@ body {
   align-items: center;
   justify-content: center;
   transition: background var(--transition-fast);
+  z-index: 10;
 }
 
 .lightbox-close:hover {
   background: rgba(255, 255, 255, 0.22);
 }
 
-/* Download button */
+/* Download button — top left */
 .lightbox-download {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1198,6 +1195,7 @@ body {
   transition: background var(--transition-fast), border-color var(--transition-fast);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  z-index: 10;
 }
 
 .lightbox-download:hover {
