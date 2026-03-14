@@ -3,14 +3,14 @@
  * Renders game cards from GAMES config and handles filtering.
  */
 
-'use strict';
+"use strict";
 
 /* ── Status helpers ──────────────────────────────────────── */
 const STATUS_META = {
-  playing: { label: '● Playing', cls: 'status-playing' },
-  completed: { label: '✓ Completed', cls: 'status-completed' },
-  wishlist: { label: '♡ Wishlist', cls: 'status-wishlist' },
-  paused: { label: '⏸ Paused', cls: 'status-paused' },
+  playing: { label: "● Playing", cls: "status-playing" },
+  completed: { label: "✓ Completed", cls: "status-completed" },
+  wishlist: { label: "♡ Wishlist", cls: "status-wishlist" },
+  paused: { label: "⏸ Paused", cls: "status-paused" },
 };
 
 /* ── Stats Counter ───────────────────────────────────────── */
@@ -27,22 +27,22 @@ function animateCount(el, to, duration = 800) {
 
 function renderStats(games) {
   const total = games.length;
-  const playing = games.filter(g => g.status === 'playing').length;
-  const completed = games.filter(g => g.status === 'completed').length;
-  const wishlist = games.filter(g => g.status === 'wishlist').length;
+  const playing = games.filter((g) => g.status === "playing").length;
+  const completed = games.filter((g) => g.status === "completed").length;
+  const wishlist = games.filter((g) => g.status === "wishlist").length;
 
-  animateCount(document.getElementById('stat-total'), total);
-  animateCount(document.getElementById('stat-playing'), playing);
-  animateCount(document.getElementById('stat-completed'), completed);
-  animateCount(document.getElementById('stat-wishlist'), wishlist);
+  animateCount(document.getElementById("stat-total"), total);
+  animateCount(document.getElementById("stat-playing"), playing);
+  animateCount(document.getElementById("stat-completed"), completed);
+  animateCount(document.getElementById("stat-wishlist"), wishlist);
 
-  const playingLabel = document.getElementById('playing-label');
+  const playingLabel = document.getElementById("playing-label");
   if (playingLabel) playingLabel.textContent = `${playing} Playing`;
 }
 
 /* ── Simple color lightening ─────────────────────────────── */
 function lighten(hex, amount) {
-  const num = parseInt(hex.replace('#', ''), 16);
+  const num = parseInt(hex.replace("#", ""), 16);
   const r = Math.min(255, (num >> 16) + amount);
   const g = Math.min(255, ((num >> 8) & 0xff) + amount);
   const b = Math.min(255, (num & 0xff) + amount);
@@ -57,17 +57,23 @@ function buildCard(game) {
 
   // Resolve hero and cover with fallback priority:
   // if fallbackImage: fallbackBanner → Steam hero | fallbackCover → Steam cover
-  const heroSrc  = (game.fallbackImage && game.fallbackBanner) ? game.fallbackBanner : game.bannerArt;
-  const coverSrc = (game.fallbackImage && game.fallbackCover)  ? game.fallbackCover  : game.coverArt;
+  const heroSrc =
+    game.fallbackImage && game.fallbackBanner
+      ? game.fallbackBanner
+      : game.bannerArt;
+  const coverSrc =
+    game.fallbackImage && game.fallbackCover
+      ? game.fallbackCover
+      : game.coverArt;
 
-  const card = document.createElement('article');
-  card.className = 'game-card';
-  card.setAttribute('role', 'listitem');
-  card.setAttribute('data-status', game.status);
-  card.setAttribute('tabindex', '0');
-  card.setAttribute('aria-label', `Open ${game.title}`);
-  card.style.setProperty('--game-accent', game.accentColor);
-  card.style.setProperty('--game-glow', game.accentGlow);
+  const card = document.createElement("article");
+  card.className = "game-card";
+  card.setAttribute("role", "listitem");
+  card.setAttribute("data-status", game.status);
+  card.setAttribute("tabindex", "0");
+  card.setAttribute("aria-label", `Open ${game.title}`);
+  card.style.setProperty("--game-accent", game.accentColor);
+  card.style.setProperty("--game-glow", game.accentGlow);
 
   card.innerHTML = `
     <!-- Banner: fallbackHero › Steam hero -->
@@ -101,12 +107,14 @@ function buildCard(game) {
         <div class="card-title">${game.title}</div>
         <div class="card-subtitle">${game.subtitle}</div>
         <div class="card-meta-row">
-          ${game.rating > 0 ? `<div class="card-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></div>` : ''}
-          ${(game.type || game.tyle) === 'Brought'
-            ? `<div class="card-ownership-badge badge-bought">🛒 Bought${game.Price ? ` · ₹${game.Price}` : ''}</div>`
-            : (game.type || game.tyle) === 'Subscription'
-            ? `<div class="card-ownership-badge badge-subscription">🎮 Subscription</div>`
-            : ''}
+          ${game.rating > 0 ? `<div class="card-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></div>` : ""}
+          ${
+            game.type === "Purchased"
+              ? `<div class="card-ownership-badge badge-bought">🛒 Purchased${game.Price ? ` · ₹${game.Price}` : ""}</div>`
+              : game.type === "Subscription"
+                ? `<div class="card-ownership-badge badge-subscription">🎮 Subscription</div>`
+                : ""
+          }
         </div>
       </div>
     </div>
@@ -116,7 +124,7 @@ function buildCard(game) {
       <p class="card-description">${game.description}</p>
 
       <div class="card-tags" aria-label="Tags">
-        ${game.tags.map(t => `<span class="card-tag">${t}</span>`).join('')}
+        ${game.tags.map((t) => `<span class="card-tag">${t}</span>`).join("")}
       </div>
 
       <div class="card-progress-section">
@@ -135,15 +143,16 @@ function buildCard(game) {
       </div>
 
       <div class="card-actions">
-        ${hasData
-      ? `<a href="game.html?id=${game.id}" class="btn-primary btn-accent"
+        ${
+          hasData
+            ? `<a href="game.html?id=${game.id}" class="btn-primary btn-accent"
                 aria-label="View ${game.title} screenshots">
                📸 &nbsp;Screenshots
              </a>`
-      : `<button class="btn-primary btn-accent disabled" disabled aria-disabled="true">
+            : `<button class="btn-primary btn-accent disabled" disabled aria-disabled="true">
                📷 &nbsp;No Screenshots Yet
              </button>`
-    }
+        }
         <button class="btn-ghost" title="Share" aria-label="Share ${game.title}"
                 onclick="shareGame('${game.id}')">🔗</button>
       </div>
@@ -152,20 +161,23 @@ function buildCard(game) {
 
   // Make the whole card clickable
   const dest = `game.html?id=${game.id}`;
-  card.addEventListener('click', (e) => {
+  card.addEventListener("click", (e) => {
     // Don't navigate if user clicked a button/link inside the card
-    if (e.target.closest('a, button')) return;
+    if (e.target.closest("a, button")) return;
     location.href = dest;
   });
-  card.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); location.href = dest; }
+  card.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      location.href = dest;
+    }
   });
 
   // Animate progress bar on next frame
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const fill = card.querySelector('.progress-bar-fill');
-      if (fill) fill.style.width = fill.dataset.target + '%';
+      const fill = card.querySelector(".progress-bar-fill");
+      if (fill) fill.style.width = fill.dataset.target + "%";
     });
   });
 
@@ -173,22 +185,24 @@ function buildCard(game) {
 }
 
 /* ── Filter Logic ────────────────────────────────────────── */
-let currentFilter = 'all';
-let currentSearch = '';
+let currentFilter = "all";
+let currentSearch = "";
 
-function renderGrid(filter, search = '') {
-  const grid = document.getElementById('games-grid');
-  const count = document.getElementById('section-count');
-  grid.innerHTML = '';
+function renderGrid(filter, search = "") {
+  const grid = document.getElementById("games-grid");
+  const count = document.getElementById("section-count");
+  grid.innerHTML = "";
 
   const q = search.toLowerCase().trim();
 
-  let filtered = filter === 'all' ? GAMES : GAMES.filter(g => g.status === filter);
+  let filtered =
+    filter === "all" ? GAMES : GAMES.filter((g) => g.status === filter);
   if (q) {
-    filtered = filtered.filter(g =>
-      g.title.toLowerCase().includes(q) ||
-      (g.description || '').toLowerCase().includes(q) ||
-      (g.tags || []).some(t => t.toLowerCase().includes(q))
+    filtered = filtered.filter(
+      (g) =>
+        g.title.toLowerCase().includes(q) ||
+        (g.description || "").toLowerCase().includes(q) ||
+        (g.tags || []).some((t) => t.toLowerCase().includes(q)),
     );
   }
 
@@ -196,33 +210,33 @@ function renderGrid(filter, search = '') {
     grid.innerHTML = `
       <div class="empty-state">
         <div class="empty-state-icon">🎮</div>
-        <p class="empty-state-text">${q ? `No games match "${search}".` : 'No games in this category yet.'}</p>
+        <p class="empty-state-text">${q ? `No games match "${search}".` : "No games in this category yet."}</p>
       </div>`;
-    count.textContent = '0 games';
+    count.textContent = "0 games";
     return;
   }
 
-  count.textContent = `${filtered.length} game${filtered.length !== 1 ? 's' : ''}`;
-  filtered.forEach(g => grid.appendChild(buildCard(g)));
+  count.textContent = `${filtered.length} game${filtered.length !== 1 ? "s" : ""}`;
+  filtered.forEach((g) => grid.appendChild(buildCard(g)));
 }
 
 function setupFilters() {
-  document.querySelectorAll('.filter-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
+  document.querySelectorAll(".filter-tab").forEach((btn) => {
+    btn.addEventListener("click", () => {
       currentFilter = btn.dataset.filter;
-      document.querySelectorAll('.filter-tab').forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
+      document.querySelectorAll(".filter-tab").forEach((b) => {
+        b.classList.remove("active");
+        b.setAttribute("aria-selected", "false");
       });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
+      btn.classList.add("active");
+      btn.setAttribute("aria-selected", "true");
       renderGrid(currentFilter, currentSearch);
     });
   });
 }
 
 function setupSearch() {
-  const input = document.getElementById('nav-search');
+  const input = document.getElementById("nav-search");
   if (!input) return;
   let timer;
 
@@ -230,8 +244,8 @@ function setupSearch() {
     clearTimeout(timer);
     const val = input.value;
     if (!val) {
-      currentSearch = '';
-      renderGrid(currentFilter, '');
+      currentSearch = "";
+      renderGrid(currentFilter, "");
       return;
     }
     timer = setTimeout(() => {
@@ -240,25 +254,26 @@ function setupSearch() {
     }, 180);
   }
 
-  input.addEventListener('input', doSearch);
-  input.addEventListener('keyup', doSearch);
+  input.addEventListener("input", doSearch);
+  input.addEventListener("keyup", doSearch);
 }
 
 /* ── Share ───────────────────────────────────────────────── */
 function shareGame(id) {
-  const url = `${location.origin}${location.pathname.replace('index.html', '')}game.html?id=${id}`;
-  const game = GAMES.find(g => g.id === id);
+  const url = `${location.origin}${location.pathname.replace("index.html", "")}game.html?id=${id}`;
+  const game = GAMES.find((g) => g.id === id);
   if (navigator.share) {
-    navigator.share({ title: game?.title || 'GameVault', url }).catch(() => { });
+    navigator.share({ title: game?.title || "GameVault", url }).catch(() => {});
   } else {
-    navigator.clipboard.writeText(url)
-      .then(() => showToast('Link copied!'))
-      .catch(() => { });
+    navigator.clipboard
+      .writeText(url)
+      .then(() => showToast("Link copied!"))
+      .catch(() => {});
   }
 }
 
 function showToast(msg) {
-  const el = document.createElement('div');
+  const el = document.createElement("div");
   el.style.cssText = `
     position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);
     padding:10px 22px;background:rgba(255,255,255,0.12);backdrop-filter:blur(12px);
@@ -269,24 +284,25 @@ function showToast(msg) {
   el.textContent = msg;
   document.body.appendChild(el);
   requestAnimationFrame(() => {
-    el.style.opacity = '1';
-    el.style.transform = 'translateX(-50%) translateY(0)';
+    el.style.opacity = "1";
+    el.style.transform = "translateX(-50%) translateY(0)";
   });
   setTimeout(() => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateX(-50%) translateY(20px)';
+    el.style.opacity = "0";
+    el.style.transform = "translateX(-50%) translateY(20px)";
     setTimeout(() => el.remove(), 400);
   }, 2000);
 }
 
 /* ── Init ────────────────────────────────────────────────── */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
   renderStats(GAMES);
-  renderGrid('all');
+  renderGrid("all");
   setupFilters();
   setupSearch();
 
   // Populate hero game count
-  const heroCount = document.getElementById('hero-game-count');
-  if (heroCount) heroCount.textContent = `${GAMES.length} game${GAMES.length !== 1 ? 's' : ''}`;
+  const heroCount = document.getElementById("hero-game-count");
+  if (heroCount)
+    heroCount.textContent = `${GAMES.length} game${GAMES.length !== 1 ? "s" : ""}`;
 });
