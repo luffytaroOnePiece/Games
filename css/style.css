@@ -784,25 +784,33 @@ body {
   margin-bottom: 8px;
 }
 
+/* Inline row: rating + ownership badge side by side */
+.card-meta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
 /* Star rating — hub cards */
 .card-rating {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: 0.8rem;
+  gap: 3px;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: 2px;
 }
 
 .card-rating-star {
   color: #f59e0b;
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   line-height: 1;
 }
 
 .card-rating-total {
-  font-size: 0.7rem;
+  font-size: 0.64rem;
   font-weight: 500;
   color: var(--text-muted);
 }
@@ -819,6 +827,30 @@ body {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--text-primary);
+}
+
+/* Ownership badge — Bought / Subscription */
+.card-ownership-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+.badge-bought {
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: #10b981;
+}
+
+.badge-subscription {
+  background: rgba(139, 92, 246, 0.14);
+  border: 1px solid rgba(139, 92, 246, 0.35);
+  color: #8b5cf6;
 }
 
 

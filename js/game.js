@@ -100,11 +100,17 @@ function renderGameMeta(game) {
   // Badges — two rows: status+platform+rating, then tags
   const statusMeta = STATUS_META[game.status] || STATUS_META.wishlist;
   const badgesEl = document.getElementById('detail-badges');
+  const ownerType = game.type || game.tyle;
   badgesEl.innerHTML = `
     <div class="detail-badges-row">
       <span class="card-status-badge ${statusMeta.cls}" style="position:static">${statusMeta.label}</span>
       <span class="card-platform-badge" style="position:static">${game.platform}</span>
       ${game.rating > 0 ? `<span class="detail-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></span>` : ''}
+      ${ownerType === 'Brought'
+        ? `<span class="card-ownership-badge badge-bought">🛒 Bought${game.Price ? ` · ₹${game.Price}` : ''}</span>`
+        : ownerType === 'Subscription'
+        ? `<span class="card-ownership-badge badge-subscription">🎮 Subscription</span>`
+        : ''}
     </div>
     <div class="detail-tags-row">
       <span class="card-tag">${game.genre}</span>

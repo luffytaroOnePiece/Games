@@ -100,7 +100,14 @@ function buildCard(game) {
       <div class="card-cover-meta">
         <div class="card-title">${game.title}</div>
         <div class="card-subtitle">${game.subtitle}</div>
-        ${game.rating > 0 ? `<div class="card-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></div>` : ''}
+        <div class="card-meta-row">
+          ${game.rating > 0 ? `<div class="card-rating"><span class="card-rating-star">★</span>${game.rating}<span class="card-rating-total">/10</span></div>` : ''}
+          ${(game.type || game.tyle) === 'Brought'
+            ? `<div class="card-ownership-badge badge-bought">🛒 Bought${game.Price ? ` · ₹${game.Price}` : ''}</div>`
+            : (game.type || game.tyle) === 'Subscription'
+            ? `<div class="card-ownership-badge badge-subscription">🎮 Subscription</div>`
+            : ''}
+        </div>
       </div>
     </div>
 
