@@ -310,6 +310,8 @@ const GAMES = [
       "Open World",
       "Japanese Mythology",
     ],
+    fallbackCover:
+      "https://gmedia.playstation.com/is/image/SIEPDC/black-myth-wukong-hero-mobile-01-en-07feb24?$800px$",
     trailers: ["dIf6fmWTv_M"],
   },
 ];
