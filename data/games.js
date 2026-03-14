@@ -292,7 +292,7 @@ const GAMES = [
     subtitle: "FromSoftware · 2019",
     platform: "PS5",
     genre: "Action-Adventure",
-    status: "Wishlist",
+    status: "wishlist",
     progress: 0,
     rating: 0,
     steamAppId: 814380,
