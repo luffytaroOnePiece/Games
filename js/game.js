@@ -73,17 +73,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 function renderGameMeta(game) {
   document.title = `GameVault · ${game.title}`;
 
-  // Hero background — use Steam landscape banner (library_hero.jpg)
+  // Resolve hero and cover with fallback priority:
+  // if fallbackImage: fallbackBanner → Steam hero | fallbackCover → Steam cover
+  const heroSrc  = (game.fallbackImage && game.fallbackBanner) ? game.fallbackBanner : game.bannerArt;
+  const coverSrc = (game.fallbackImage && game.fallbackCover)  ? game.fallbackCover  : game.coverArt;
+
+  // Hero background
   const heroImg = document.getElementById('detail-hero-img');
   if (heroImg) {
-    heroImg.src = game.bannerArt;
+    heroImg.src = heroSrc;
     heroImg.alt = `${game.title} banner`;
   }
 
-  // Portrait cover thumbnail (library_600x900_2x.jpg)
+  // Portrait cover thumbnail
   const cover = document.getElementById('detail-cover');
   if (cover) {
-    cover.src = game.coverArt;
+    cover.src = coverSrc;
     cover.alt = `${game.title} cover`;
   }
 

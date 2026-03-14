@@ -55,6 +55,11 @@ function buildCard(game) {
   const hasData = !!game.dataSourceUrl;
   const progressGradient = `linear-gradient(90deg, ${game.accentColor}, ${lighten(game.accentColor, 40)})`;
 
+  // Resolve hero and cover with fallback priority:
+  // if fallbackImage: fallbackBanner → Steam hero | fallbackCover → Steam cover
+  const heroSrc  = (game.fallbackImage && game.fallbackBanner) ? game.fallbackBanner : game.bannerArt;
+  const coverSrc = (game.fallbackImage && game.fallbackCover)  ? game.fallbackCover  : game.coverArt;
+
   const card = document.createElement('article');
   card.className = 'game-card';
   card.setAttribute('role', 'listitem');
@@ -65,10 +70,10 @@ function buildCard(game) {
   card.style.setProperty('--game-glow', game.accentGlow);
 
   card.innerHTML = `
-    <!-- Steam landscape banner strip (library_hero.jpg) -->
+    <!-- Banner: fallbackHero › Steam hero -->
     <div class="card-banner">
       <img
-        src="${game.bannerArt}"
+        src="${heroSrc}"
         alt="${game.title} banner"
         loading="lazy"
         width="800"
@@ -80,11 +85,11 @@ function buildCard(game) {
       <span class="card-platform-badge">${game.platform}</span>
     </div>
 
-    <!-- Portrait cover overlapping banner bottom + title -->
+    <!-- Cover: fallbackBanner › Steam cover -->
     <div class="card-cover-row">
       <div class="card-cover">
         <img
-          src="${game.coverArt}"
+          src="${coverSrc}"
           alt="${game.title} cover"
           loading="lazy"
           width="90"
