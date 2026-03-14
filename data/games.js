@@ -223,7 +223,7 @@ const GAMES = [
     fallbackCover:
       "https://gmedia.playstation.com/is/image/SIEPDC/forza-horizon-6-hero-mobile-white-en-13jan26?$800px$",
     fallbackBanner: null,
-    trailers: ["XG1Ll2CVhug", "ZUhPv2eF5n4", "CqNaN3oJREw"]
+    trailers: ["XG1Ll2CVhug", "ZUhPv2eF5n4", "CqNaN3oJREw"],
   },
   {
     id: "gta-6",
@@ -254,6 +254,62 @@ const GAMES = [
       "https://gmedia.playstation.com/is/image/SIEPDC/GTA-VI-Trailer-2-Homepage-Hero-Mobile-01-06may25?$800px$",
     fallbackBanner:
       "https://gmedia.playstation.com/is/image/SIEPDC/grand-theft-auto-vi-screenshot-08-en-06may25?$800px$",
-    trailers: ["QdBZY2fkU-0", "VQRLujxTm3c"]
+    trailers: ["QdBZY2fkU-0", "VQRLujxTm3c"],
+  },
+  {
+    id: "black-myth-wukong",
+    title: "Black Myth: Wukong",
+    subtitle: "Game Science · 2024",
+    platform: "PS5",
+    genre: "Action RPG",
+    status: "wishlist",
+    progress: 0,
+    rating: 0,
+    steamAppId: 2358720,
+    ...STEAM_CDN(2358720),
+    dataSourceUrl: null,
+    imageBaseUrl: null,
+    accentColor: "#5c2f07",
+    accentGlow: "rgba(230, 126, 34, 0.45)",
+    description:
+      "Black Myth: Wukong is an action RPG rooted in Chinese mythology. You shall set out as the Destined One to venture into the challenges and marvels ahead, to uncover the obscured truth beneath the veil of a glorious legend from the past. ",
+    tags: [
+      "Action RPG",
+      "Chinese Mythology",
+      "Open World",
+      "Co-op",
+      "Story Rich",
+    ],
+    fallbackImage: true,
+    fallbackCover:
+      "https://gmedia.playstation.com/is/image/SIEPDC/Black-Myth-Wukong-Trailer-1-Homepage-Hero-Mobile-01-06may25?$800px$",
+    fallbackBanner: null,
+    trailers: ["pnSsgRJmsCc", "u83VdXAVq08", "Cr5rQ1NZ0Tw"],
+  },
+  {
+    id: "sekiro-shadows-die-twice",
+    title: "Sekiro: Shadows Die Twice",
+    subtitle: "FromSoftware · 2019",
+    platform: "PS5",
+    genre: "Action-Adventure",
+    status: "Wishlist",
+    progress: 0,
+    rating: 0,
+    steamAppId: 814380,
+    ...STEAM_CDN(814380),
+    dataSourceUrl: null,
+    imageBaseUrl: null,
+    accentColor: "#7f8c8d",
+    accentGlow: "rgba(127, 140, 141, 0.45)",
+    description:
+      "In Sekiro™: Shadows Die Twice you are the 'one-armed wolf', a disgraced and disfigured warrior rescued from the brink of death. Bound to protect a young lord who is the descendant of an ancient bloodline, you become the target of many vicious enemies, including the dangerous Ashina clan. When the young lord is captured, nothing will stop you on a perilous quest to regain your honor, not even death itself. Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Unleash an arsenal of deadly prosthetic tools and powerful ninja abilities while you blend stealth, vertical traversal, and visceral head to head combat in a bloody confrontation. Take Revenge. Restore Your Honor. Kill Ingeniously.",
+    tags: [
+      "Action-Adventure",
+      "Soulslike",
+      "Stealth",
+      "Open World",
+      "Japanese Mythology",
+    ],
+    trailers: ["dIf6fmWTv_M"],
   },
 ];
