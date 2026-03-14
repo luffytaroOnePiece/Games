@@ -223,6 +223,7 @@ const GAMES = [
     fallbackCover:
       "https://gmedia.playstation.com/is/image/SIEPDC/forza-horizon-6-hero-mobile-white-en-13jan26?$800px$",
     fallbackBanner: null,
+    trailers: ["XG1Ll2CVhug", "ZUhPv2eF5n4", "CqNaN3oJREw"]
   },
   {
     id: "gta-6",
@@ -253,5 +254,6 @@ const GAMES = [
       "https://gmedia.playstation.com/is/image/SIEPDC/GTA-VI-Trailer-2-Homepage-Hero-Mobile-01-06may25?$800px$",
     fallbackBanner:
       "https://gmedia.playstation.com/is/image/SIEPDC/grand-theft-auto-vi-screenshot-08-en-06may25?$800px$",
+    trailers: ["QdBZY2fkU-0", "VQRLujxTm3c"]
   },
 ];

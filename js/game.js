@@ -42,6 +42,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Populate static metadata immediately
   renderGameMeta(game);
 
+  // Render trailers (if available)
+  if (game.trailers && game.trailers.length > 0) {
+    renderTrailers(game.trailers);
+  }
+
   // Load screenshot data (if available)
   const container = document.getElementById("chapters-container");
   if (!game.dataSourceUrl) {
@@ -148,6 +153,74 @@ function renderGameMeta(game) {
   const orb2 = document.querySelector(".bg-orb-2");
   if (orb2)
     orb2.style.background = `radial-gradient(circle, ${game.accentColor} 0%, transparent 70%)`;
+}
+
+/* ── Render Trailers ─────────────────────────────────────── */
+function renderTrailers(trailerIds) {
+  const container = document.getElementById("chapters-container");
+
+  const section = document.createElement("div");
+  section.className = "trailers-section";
+
+  const grid = document.createElement("div");
+  grid.className = "trailers-grid";
+
+  trailerIds.forEach((id) => {
+    const card = document.createElement("div");
+    card.className = "trailer-card";
+
+    const wrap = document.createElement("div");
+    wrap.className = "trailer-embed-wrap";
+
+    const thumb = document.createElement("div");
+    thumb.className = "trailer-thumb";
+    thumb.setAttribute("role", "button");
+    thumb.setAttribute("tabindex", "0");
+    thumb.setAttribute("aria-label", "Play trailer");
+
+    // YouTube thumbnail (maxres with hqdefault fallback)
+    const img = document.createElement("img");
+    img.src = `https://img.youtube.com/vi/${id}/maxresdefault.jpg`;
+    img.alt = "Trailer thumbnail";
+    img.loading = "lazy";
+    img.onerror = function () {
+      this.src = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+    };
+
+    thumb.appendChild(img);
+
+    // Click / Enter → swap thumbnail for autoplay iframe
+    const activate = () => {
+      const iframe = document.createElement("iframe");
+      iframe.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
+      iframe.title = "Trailer";
+      iframe.frameBorder = "0";
+      iframe.width = "100%";
+      iframe.height = "100%";
+      iframe.allow =
+        "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+      iframe.allowFullscreen = true;
+      wrap.innerHTML = "";
+      wrap.appendChild(iframe);
+    };
+
+    thumb.addEventListener("click", activate);
+    thumb.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        activate();
+      }
+    });
+
+    wrap.appendChild(thumb);
+    card.appendChild(wrap);
+    grid.appendChild(card);
+  });
+
+  section.innerHTML = `<h2 class="chapters-title trailers-heading">🎬 Trailers</h2>`;
+  section.appendChild(grid);
+
+  container.parentNode.insertBefore(section, container);
 }
 
 /* ── Render Chapters ─────────────────────────────────────── */
