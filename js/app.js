@@ -167,21 +167,29 @@ function buildCard(game) {
 
 /* ── Filter Logic ────────────────────────────────────────── */
 let currentFilter = 'all';
+let currentSearch = '';
 
-function renderGrid(filter) {
+function renderGrid(filter, search = '') {
   const grid = document.getElementById('games-grid');
   const count = document.getElementById('section-count');
   grid.innerHTML = '';
 
-  const filtered = filter === 'all'
-    ? GAMES
-    : GAMES.filter(g => g.status === filter);
+  const q = search.toLowerCase().trim();
+
+  let filtered = filter === 'all' ? GAMES : GAMES.filter(g => g.status === filter);
+  if (q) {
+    filtered = filtered.filter(g =>
+      g.title.toLowerCase().includes(q) ||
+      (g.description || '').toLowerCase().includes(q) ||
+      (g.tags || []).some(t => t.toLowerCase().includes(q))
+    );
+  }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="empty-state">
         <div class="empty-state-icon">🎮</div>
-        <p class="empty-state-text">No games in this category yet.</p>
+        <p class="empty-state-text">${q ? `No games match "${search}".` : 'No games in this category yet.'}</p>
       </div>`;
     count.textContent = '0 games';
     return;
@@ -201,9 +209,32 @@ function setupFilters() {
       });
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
-      renderGrid(currentFilter);
+      renderGrid(currentFilter, currentSearch);
     });
   });
+}
+
+function setupSearch() {
+  const input = document.getElementById('nav-search');
+  if (!input) return;
+  let timer;
+
+  function doSearch() {
+    clearTimeout(timer);
+    const val = input.value;
+    if (!val) {
+      currentSearch = '';
+      renderGrid(currentFilter, '');
+      return;
+    }
+    timer = setTimeout(() => {
+      currentSearch = val;
+      renderGrid(currentFilter, currentSearch);
+    }, 180);
+  }
+
+  input.addEventListener('input', doSearch);
+  input.addEventListener('keyup', doSearch);
 }
 
 /* ── Share ───────────────────────────────────────────────── */
@@ -246,4 +277,9 @@ document.addEventListener('DOMContentLoaded', () => {
   renderStats(GAMES);
   renderGrid('all');
   setupFilters();
+  setupSearch();
+
+  // Populate hero game count
+  const heroCount = document.getElementById('hero-game-count');
+  if (heroCount) heroCount.textContent = `${GAMES.length} game${GAMES.length !== 1 ? 's' : ''}`;
 });
