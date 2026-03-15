@@ -137,8 +137,6 @@ const GAMES = [
     ],
   },
   {
-    // FIX: Title updated to reflect the actual Steam product (Legacy of Thieves Collection)
-    // FIX: Subtitle year corrected from 2020 (PS4 original) → 2022 (PS5 remaster)
     id: "uncharted-4",
     title: "Uncharted 4",
     subtitle: "Naughty Dog · 2022",
@@ -169,12 +167,8 @@ const GAMES = [
     ],
   },
   {
-    // FIX: Subtitle year corrected from 2025 → 2024 (TLOU2 Remastered PS5 release)
-    // FIX: progress corrected from 20 → 100 to match status: "completed"
-    // FIX: type: "Subscription" added (was missing, unlike all other subscription games)
-    // FIX: accentGlow corrected — was using GoW's red glow, now matches green accent
     id: "last-of-us-part-2",
-    title: "The Last of Us Part II Remastered",
+    title: "The Last of Us Part II",
     subtitle: "Naughty Dog · 2024",
     platform: "PS5",
     type: "Subscription",
