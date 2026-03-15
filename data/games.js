@@ -395,8 +395,8 @@ const GAMES = [
     ],
   },
   {
-    id: "gta-5-enhanced",
-    title: "Grand Theft Auto V Enhanced",
+    id: "gta-5",
+    title: "Grand Theft Auto V",
     subtitle: "Rockstar Games · 2024",
     platform: "PS5",
     genre: "Action-Adventure",
