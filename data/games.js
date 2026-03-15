@@ -493,8 +493,8 @@ const GAMES = [
     ...STEAM_CDN(2124490),
     dataSourceUrl: null,
     imageBaseUrl: null,
-    accentColor: "#8b0000",
-    accentGlow: "rgba(139, 0, 0, 0.45)",
+    accentColor: "#dedbdbff",
+    accentGlow: "rgba(27, 26, 26, 0.45)",
     description:
       "Investigating a letter from his late wife Mary, James Sunderland returns to Silent Hill — the town where they made so many memories together. What he finds is a ghost town shrouded in deep fog, prowled by disturbing monsters that seem to embody his darkest guilt and grief. Confront the horrors within, solve puzzles, and uncover the truth behind Mary's mysterious message in Bloober Team's critically acclaimed remake of the 2001 psychological horror masterpiece.",
     tags: [
