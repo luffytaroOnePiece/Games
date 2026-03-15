@@ -103,8 +103,25 @@
       <!-- Games Section -->
       <section class="container" aria-label="Game library">
         <div class="section-header">
-          <h2 class="section-title">Library</h2>
-          <span class="section-count" id="section-count">— games</span>
+          <div class="section-header-left">
+            <h2 class="section-title">Library</h2>
+            <span class="section-count" id="section-count">— games</span>
+          </div>
+          <div class="section-header-right">
+            <select id="sort-select" class="control-select" aria-label="Sort games">
+              <option value="default">Sort by: Default</option>
+              <option value="title-asc">Title: A-Z</option>
+              <option value="title-desc">Title: Z-A</option>
+              <option value="year-desc">Newest First</option>
+              <option value="year-asc">Oldest First</option>
+              <option value="rating-desc">Highest Rated</option>
+              <option value="progress-desc">Highest Progress</option>
+            </select>
+            <select id="tag-select" class="control-select" aria-label="Filter by tag">
+              <option value="all">Tags: All</option>
+              <!-- Populated by JS -->
+            </select>
+          </div>
         </div>
 
         <!-- Filter Tabs -->

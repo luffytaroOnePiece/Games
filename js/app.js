@@ -187,6 +187,8 @@ function buildCard(game) {
 /* ── Filter Logic ────────────────────────────────────────── */
 let currentFilter = "all";
 let currentSearch = "";
+let currentSort = "default";
+let currentTag = "all";
 
 function renderGrid(filter, search = "") {
   const grid = document.getElementById("games-grid");
@@ -204,6 +206,33 @@ function renderGrid(filter, search = "") {
         (g.description || "").toLowerCase().includes(q) ||
         (g.tags || []).some((t) => t.toLowerCase().includes(q)),
     );
+  }
+
+  if (currentTag !== "all") {
+    filtered = filtered.filter((g) => g.tags && g.tags.includes(currentTag));
+  }
+
+  if (currentSort !== "default") {
+    filtered.sort((a, b) => {
+      switch (currentSort) {
+        case "title-asc":
+          return a.title.localeCompare(b.title);
+        case "title-desc":
+          return b.title.localeCompare(a.title);
+        case "year-desc":
+        case "year-asc": {
+          const yearA = parseInt((a.subtitle || "").split("·")[1]) || 0;
+          const yearB = parseInt((b.subtitle || "").split("·")[1]) || 0;
+          return currentSort === "year-desc" ? yearB - yearA : yearA - yearB;
+        }
+        case "rating-desc":
+          return (b.rating || 0) - (a.rating || 0);
+        case "progress-desc":
+          return (b.progress || 0) - (a.progress || 0);
+        default:
+          return 0;
+      }
+    });
   }
 
   if (filtered.length === 0) {
@@ -233,6 +262,39 @@ function setupFilters() {
       renderGrid(currentFilter, currentSearch);
     });
   });
+}
+
+function setupSortAndFilter() {
+  const tagSelect = document.getElementById("tag-select");
+  const sortSelect = document.getElementById("sort-select");
+
+  if (tagSelect) {
+    const allTags = new Set();
+    GAMES.forEach((g) => {
+      if (g.tags) g.tags.forEach((t) => allTags.add(t));
+    });
+    
+    Array.from(allTags)
+      .sort((a, b) => a.localeCompare(b))
+      .forEach((tag) => {
+        const opt = document.createElement("option");
+        opt.value = tag;
+        opt.textContent = tag;
+        tagSelect.appendChild(opt);
+      });
+
+    tagSelect.addEventListener("change", (e) => {
+      currentTag = e.target.value;
+      renderGrid(currentFilter, currentSearch);
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      renderGrid(currentFilter, currentSearch);
+    });
+  }
 }
 
 function setupSearch() {
@@ -299,6 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderStats(GAMES);
   renderGrid("all");
   setupFilters();
+  setupSortAndFilter();
   setupSearch();
 
   // Populate hero game count
