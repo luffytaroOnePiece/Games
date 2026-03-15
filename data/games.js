@@ -7,10 +7,13 @@
  *   Banner (landscape hero):   https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/{appId}/library_hero.jpg
  */
 
-const STEAM_CDN = (appId) => ({
-  coverArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
-  bannerArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_hero.jpg`,
-});
+const STEAM_CDN = (appId) =>
+  appId
+    ? {
+      coverArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
+      bannerArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_hero.jpg`,
+    }
+    : { coverArt: null, bannerArt: null }; // FIX: guard against null appId producing broken CDN URLs
 
 const GAMES = [
   {
@@ -19,7 +22,7 @@ const GAMES = [
     subtitle: "Santa Monica Studio · 2022",
     platform: "PS5",
     type: "Subscription",
-    genre: "Action-Adventure",
+    genre: "Action RPG",
     status: "playing",
     progress: 5,
     rating: 0,
@@ -34,11 +37,14 @@ const GAMES = [
     description:
       "From Santa Monica Studio comes the sequel to the critically acclaimed God of War (2018). Fimbulwinter is well underway. Kratos and Atreus must journey to each of the Nine Realms in search of answers as Asgardian forces prepare for a prophesied battle that will end the world. Along the way they will explore stunning, mythical landscapes, and face fearsome enemies in the form of Norse gods and monsters. The threat of Ragnarök grows ever closer. Kratos and Atreus must choose between their own safety and the safety of the realms.",
     tags: [
+      "Action RPG",
       "Action-Adventure",
-      "Norse Mythology",
-      "Story-Driven",
-      "Melee Combat",
-      "Exploration",
+      "Hack and Slash",
+      "Mythology",
+      "Story Rich",
+      "Cinematic",
+      "Third Person",
+      "Atmospheric",
     ],
   },
   {
@@ -60,11 +66,15 @@ const GAMES = [
     description:
       "In a ravaged civilisation, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.",
     tags: [
-      "Action-Adventure",
-      "Survival",
       "Story Rich",
       "Post-Apocalyptic",
+      "Survival Horror",
+      "Third-Person Shooter",
+      "Cinematic",
+      "Emotional",
       "Stealth",
+      "Atmospheric",
+      "Remake",
     ],
   },
   {
@@ -74,7 +84,7 @@ const GAMES = [
     platform: "PS5",
     type: "Purchased",
     Price: "2300",
-    genre: "Soulslike - Action RPG",
+    genre: "Action RPG",
     status: "playing",
     progress: 50,
     rating: 10,
@@ -86,7 +96,15 @@ const GAMES = [
     accentGlow: "rgba(142, 68, 173, 0.45)",
     description:
       "In the Lands Between ruled by Queen Marika the Eternal, the Elden Ring, the source of the Erdtree, has been shattered. Marika's offspring, demigods all, claimed the shards of the Elden Ring known as the Great Runes, and the mad taint of their newfound strength triggered a war: The Shattering. A war that meant abandonment by the Greater Will. And now the guidance of grace will be brought to the Tarnished who were spurned by the grace of gold and exiled from the Lands Between. Ye dead who yet live, your grace long lost, follow the path to the Lands Between beyond the foggy sea to stand before the Elden Ring. And become the Elden Lord.",
-    tags: ["Open World", "Action RPG", "Soulslike", "Dark Fantasy"],
+    tags: [
+      "Souls-like",
+      "Open World",
+      "Action RPG",
+      "Dark Fantasy",
+      "Difficult",
+      "Multiplayer",
+      "Atmospheric",
+    ],
   },
   {
     id: "ghost-of-tsushima",
@@ -107,17 +125,23 @@ const GAMES = [
     description:
       "In the late 13th century, the Mongol Empire invades the island of Tsushima. As one of the last surviving samurai, Jin Sakai must set aside his traditional training and forge a new path to become the Ghost and fight back to save his home.",
     tags: [
-      "Action-Adventure",
       "Open World",
-      "Samurai",
+      "Action-Adventure",
+      "Action RPG",
       "Stealth",
       "Story Rich",
+      "Ninja",
+      "Historical",
+      "Souls-like",
+      "Atmospheric",
     ],
   },
   {
-    id: "uncharted-4",
-    title: "Uncharted 4: A Thief's End",
-    subtitle: "Naughty Dog · 2020",
+    // FIX: Title updated to reflect the actual Steam product (Legacy of Thieves Collection)
+    // FIX: Subtitle year corrected from 2020 (PS4 original) → 2022 (PS5 remaster)
+    id: "uncharted-legacy-of-thieves",
+    title: "Uncharted: Legacy of Thieves Collection",
+    subtitle: "Naughty Dog · 2022",
     platform: "PS5",
     type: "Subscription",
     genre: "Action-Adventure",
@@ -131,39 +155,50 @@ const GAMES = [
     accentColor: "#2c3e50",
     accentGlow: "rgba(44, 62, 80, 0.45)",
     description:
-      "Experience the thrilling adventures of Nathan Drake in this collection of the fourth installment in the Uncharted series.",
+      "Uncover thrilling cinematic storytelling and blockbuster action in this PS5 remaster collection. Includes Uncharted 4: A Thief's End — Nathan Drake's final adventure — and Uncharted: The Lost Legacy, featuring Chloe Frazer and Nadine Ross. Both titles rebuilt with enhanced visuals, performance modes, and DualSense support.",
     tags: [
-      "Action-Adventure",
-      "Open World",
-      "Treasure Hunting",
+      "Adventure",
       "Story Rich",
+      "Action-Adventure",
+      "Cinematic",
       "Third-Person Shooter",
+      "Parkour",
+      "Exploration",
+      "Stealth",
+      "Atmospheric",
     ],
   },
   {
+    // FIX: Subtitle year corrected from 2025 → 2024 (TLOU2 Remastered PS5 release)
+    // FIX: progress corrected from 20 → 100 to match status: "completed"
+    // FIX: type: "Subscription" added (was missing, unlike all other subscription games)
+    // FIX: accentGlow corrected — was using GoW's red glow, now matches green accent
     id: "last-of-us-part-2",
-    title: "The Last of Us Part II",
-    subtitle: "Naughty Dog · 2025",
+    title: "The Last of Us Part II Remastered",
+    subtitle: "Naughty Dog · 2024",
     platform: "PS5",
     type: "Subscription",
-    genre: "Survival Horror",
+    genre: "Action-Adventure",
     status: "completed",
-    progress: 20,
+    progress: 100,
     rating: 9,
     steamAppId: 2531310,
     ...STEAM_CDN(2531310),
     dataSourceUrl: null,
     imageBaseUrl: null,
-    accentColor: "#2bc055",
-    accentGlow: "rgba(192, 57, 43, 0.45)",
+    accentColor: "#1e8449",
+    accentGlow: "rgba(30, 132, 73, 0.45)",
     description:
       "Five years after their dangerous journey across the post-pandemic United States, Ellie and Joel have settled down in Jackson, Wyoming. Living amongst a thriving community of survivors has allowed them peace and stability, despite the constant threat of the infected and other, more desperate survivors. When a violent event disrupts that peace, Ellie embarks on a relentless pursuit of vengeance that will lead her to encounter terrifying new factions of survivors, and shocking truths about the post-pandemic world.",
     tags: [
-      "Action-Adventure",
-      "Survival",
       "Story Rich",
       "Post-Apocalyptic",
+      "Survival Horror",
+      "Third-Person Shooter",
       "Stealth",
+      "Emotional",
+      "Cinematic",
+      "Atmospheric",
     ],
   },
   {
@@ -190,9 +225,12 @@ const GAMES = [
     tags: [
       "Racing",
       "Open World",
+      "Driving",
+      "Automobile Sim",
       "Multiplayer",
       "Car Customization",
-      "Dynamic Weather",
+      "Realistic",
+      "Exploration",
     ],
   },
   {
@@ -215,9 +253,13 @@ const GAMES = [
     tags: [
       "Racing",
       "Open World",
+      "Driving",
+      "Automobile Sim",
       "Multiplayer",
       "Car Customization",
-      "Dynamic Weather",
+      "Exploration",
+      "Japan",
+      "Tokyo City"
     ],
     fallbackImage: true,
     fallbackCover:
@@ -226,6 +268,8 @@ const GAMES = [
     trailers: ["XG1Ll2CVhug", "ZUhPv2eF5n4", "CqNaN3oJREw"],
   },
   {
+    // FIX: STEAM_CDN(null) previously generated broken image URLs like /apps/null/...
+    //      STEAM_CDN helper now guards against null — returns { coverArt: null, bannerArt: null }
     id: "gta-6",
     title: "Grand Theft Auto VI",
     subtitle: "Rockstar Games · 2026",
@@ -239,15 +283,17 @@ const GAMES = [
     dataSourceUrl: null,
     imageBaseUrl: null,
     accentColor: "#1b87df",
-    accentGlow: "rgba(192, 57, 43, 0.45)",
+    accentGlow: "rgba(27, 135, 223, 0.45)",
     description:
       "Grand Theft Auto VI is the highly anticipated next installment in the Grand Theft Auto series. Set in a sprawling open world inspired by Miami and its surrounding areas, GTA VI promises to deliver an immersive and dynamic experience filled with crime, action, and dark humor. Players will take on the role of a new protagonist navigating the criminal underworld, engaging in high-stakes heists, and exploring a richly detailed city teeming with life. With cutting-edge graphics, an expansive map, and a compelling narrative, GTA VI is poised to redefine the open-world genre once again.",
     tags: [
-      "Action-Adventure",
       "Open World",
+      "Action-Adventure",
       "Crime",
+      "Third-Person Shooter",
       "Story Rich",
       "Multiplayer",
+      "Sandbox",
     ],
     fallbackImage: true,
     fallbackCover:
@@ -272,19 +318,22 @@ const GAMES = [
     accentColor: "#5c2f07",
     accentGlow: "rgba(230, 126, 34, 0.45)",
     description:
-      "Black Myth: Wukong is an action RPG rooted in Chinese mythology. You shall set out as the Destined One to venture into the challenges and marvels ahead, to uncover the obscured truth beneath the veil of a glorious legend from the past. ",
+      "Black Myth: Wukong is an action RPG rooted in Chinese mythology. You shall set out as the Destined One to venture into the challenges and marvels ahead, to uncover the obscured truth beneath the veil of a glorious legend from the past.",
     tags: [
       "Action RPG",
-      "Chinese Mythology",
-      "Open World",
-      "Co-op",
+      "Souls-like",
+      "Mythology",
+      "Dark Fantasy",
+      "Hack and Slash",
+      "Difficult",
       "Story Rich",
+      "Atmospheric",
     ],
     fallbackImage: true,
     fallbackCover:
       "https://gmedia.playstation.com/is/image/SIEPDC/black-myth-wukong-hero-mobile-01-en-07feb24?$800px$",
     fallbackBanner: null,
-    trailers: ["pnSsgRJmsCc", "u83VdXAVq08", "Cr5rQ1NZ0Tw"],
+    trailers: ["pnSggRJmsCc", "u83VdXAVq08", "Cr5rQ1NZ0Tw"],
   },
   {
     id: "sekiro-shadows-die-twice",
@@ -304,11 +353,14 @@ const GAMES = [
     description:
       "In Sekiro™: Shadows Die Twice you are the 'one-armed wolf', a disgraced and disfigured warrior rescued from the brink of death. Bound to protect a young lord who is the descendant of an ancient bloodline, you become the target of many vicious enemies, including the dangerous Ashina clan. When the young lord is captured, nothing will stop you on a perilous quest to regain your honor, not even death itself. Explore late 1500s Sengoku Japan, a brutal period of constant life and death conflict, as you come face to face with larger than life foes in a dark and twisted world. Unleash an arsenal of deadly prosthetic tools and powerful ninja abilities while you blend stealth, vertical traversal, and visceral head to head combat in a bloody confrontation. Take Revenge. Restore Your Honor. Kill Ingeniously.",
     tags: [
+      "Souls-like",
       "Action-Adventure",
-      "Soulslike",
+      "Difficult",
       "Stealth",
-      "Open World",
-      "Japanese Mythology",
+      "Ninja",
+      "Hack and Slash",
+      "Story Rich",
+      "Atmospheric",
     ],
     trailers: ["dIf6fmWTv_M"],
   },
@@ -332,11 +384,14 @@ const GAMES = [
     description:
       "Arthur Morgan and the Van der Linde Gang are outlaws on the run. With federal agents and bounty hunters massing on their heels, the gang must rob, steal, and fight their way across the rugged heartland in order to survive.",
     tags: [
-      "Action-Adventure",
       "Open World",
-      "Western",
       "Story Rich",
-      "Multiplayer",
+      "Western",
+      "Realistic",
+      "Atmospheric",
+      "Singleplayer",
+      "Adventure",
+      "Immersive Sim",
     ],
   },
   {
@@ -355,20 +410,24 @@ const GAMES = [
     dataSourceUrl: null,
     imageBaseUrl: null,
     accentColor: "#1b87df",
-    accentGlow: "rgba(192, 57, 43, 0.45)",
-    description: "When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.",
+    accentGlow: "rgba(27, 135, 223, 0.45)",
+    description:
+      "When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.",
     tags: [
-      "Action-Adventure",
       "Open World",
+      "Action-Adventure",
       "Crime",
+      "Third-Person Shooter",
       "Story Rich",
       "Multiplayer",
+      "Sandbox",
     ],
   },
   {
+    // FIX: subtitle developer corrected from "Train Sim World 5" → "Dovetail Games"
     id: "train-sim-world-5",
     title: "Train Sim World 5",
-    subtitle: "Train Sim World 5 · 2024",
+    subtitle: "Dovetail Games · 2024",
     platform: "PS5",
     genre: "Simulation",
     status: "paused",
@@ -380,21 +439,28 @@ const GAMES = [
     dataSourceUrl: null,
     imageBaseUrl: null,
     accentColor: "#1b87df",
-    accentGlow: "rgba(192, 57, 43, 0.45)",
-    description: "Take on new challenges and new roles as you master the tracks and trains of iconic cities across 3 new routes. Immerse yourself in the ultimate rail hobby and embark on your next journey. From sleek, tilting marvels to the grunt of mighty, modern diesels - The Rails are Yours in Train Sim World 5!",
+    accentGlow: "rgba(27, 135, 223, 0.45)",
+    description:
+      "Take on new challenges and new roles as you master the tracks and trains of iconic cities across 3 new routes. Immerse yourself in the ultimate rail hobby and embark on your next journey. From sleek, tilting marvels to the grunt of mighty, modern diesels - The Rails are Yours in Train Sim World 5!",
     tags: [
       "Simulation",
       "Railway",
-      "Train",
+      "Realistic",
+      "Driving",
+      "Transportation",
+      "Singleplayer",
+      "Atmospheric",
+      "Immersive Sim",
       "Train Sim"
     ],
   },
   {
+    // FIX: subtitle year corrected from 2024 → 2020 (original release date)
     id: "cyberpunk-2077",
     title: "Cyberpunk 2077",
-    subtitle: "CD Projekt Red · 2024",
+    subtitle: "CD Projekt Red · 2020",
     platform: "PS5",
-    genre: "Action-Adventure",
+    genre: "RPG",
     status: "paused",
     type: "Subscription",
     progress: 0,
@@ -403,16 +469,20 @@ const GAMES = [
     ...STEAM_CDN(1091500),
     dataSourceUrl: null,
     imageBaseUrl: null,
-    accentColor: "#1b87df",
-    accentGlow: "rgba(192, 57, 43, 0.45)",
-    description: "Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.",
+    accentColor: "#f1c40f",
+    accentGlow: "rgba(241, 196, 15, 0.45)",
+    description:
+      "Cyberpunk 2077 is an open-world, action-adventure RPG set in the dark future of Night City — a dangerous megalopolis obsessed with power, glamor, and ceaseless body modification.",
     tags: [
-      "Action-Adventure",
+      "Cyberpunk",
       "Open World",
-      "Crime",
+      "RPG",
+      "Action RPG",
+      "Sci-fi",
       "Story Rich",
-      "Multiplayer",
+      "Futuristic",
+      "Immersive Sim",
+      "Atmospheric",
     ],
-  }
-
+  },
 ];
