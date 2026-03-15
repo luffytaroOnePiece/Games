@@ -139,8 +139,8 @@ const GAMES = [
   {
     // FIX: Title updated to reflect the actual Steam product (Legacy of Thieves Collection)
     // FIX: Subtitle year corrected from 2020 (PS4 original) → 2022 (PS5 remaster)
-    id: "uncharted-legacy-of-thieves",
-    title: "Uncharted: Legacy of Thieves Collection",
+    id: "uncharted-4",
+    title: "Uncharted 4",
     subtitle: "Naughty Dog · 2022",
     platform: "PS5",
     type: "Subscription",
