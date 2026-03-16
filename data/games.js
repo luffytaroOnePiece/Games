@@ -10,9 +10,9 @@
 const STEAM_CDN = (appId) =>
   appId
     ? {
-      coverArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
-      bannerArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_hero.jpg`,
-    }
+        coverArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_600x900_2x.jpg`,
+        bannerArt: `https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/${appId}/library_hero.jpg`,
+      }
     : { coverArt: null, bannerArt: null }; // FIX: guard against null appId producing broken CDN URLs
 
 const GAMES = [
@@ -90,8 +90,10 @@ const GAMES = [
     rating: 10,
     steamAppId: 1245620,
     ...STEAM_CDN(1245620),
-    dataSourceUrl: null,
-    imageBaseUrl: null,
+    dataSourceUrl:
+      "https://raw.githubusercontent.com/luffytaroOnePiece/eldenring/main/dataSource.json",
+    imageBaseUrl:
+      "https://raw.githubusercontent.com/luffytaroOnePiece/eldenring/main/",
     accentColor: "#8e44ad",
     accentGlow: "rgba(142, 68, 173, 0.45)",
     description:
@@ -174,7 +176,7 @@ const GAMES = [
     type: "Subscription",
     genre: "Action-Adventure",
     status: "playing",
-    progress: 27,
+    progress: 33,
     rating: 9,
     steamAppId: 2531310,
     ...STEAM_CDN(2531310),
@@ -253,7 +255,7 @@ const GAMES = [
       "Car Customization",
       "Exploration",
       "Japan",
-      "Tokyo City"
+      "Tokyo City",
     ],
     fallbackImage: true,
     fallbackCover:
@@ -445,7 +447,7 @@ const GAMES = [
       "Singleplayer",
       "Atmospheric",
       "Immersive Sim",
-      "Train Sim"
+      "Train Sim",
     ],
   },
   {
